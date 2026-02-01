@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import AudioRecorder from "../components/AudioRecorder";
+import { API_ENDPOINTS, logApiCall } from "../config/api";
 
 export default function QuestionScreen() {
   const { userId } = useLocalSearchParams<{ userId: string }>();
@@ -31,8 +32,10 @@ export default function QuestionScreen() {
     setLoading(true);
     setAnswer("");
     try {
+      logApiCall(API_ENDPOINTS.getAnswer, "POST", { userId, question: q });
+
       const res = await axios.post(
-        `https://3qn6nvqb-5000.inc1.devtunnels.ms/interview/get-answer`,
+        API_ENDPOINTS.getAnswer,
         {
           userId,
           question: q,

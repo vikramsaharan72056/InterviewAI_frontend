@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Alert, Button, Platform, Text, View } from "react-native";
+import { Alert, Platform, Text, TouchableOpacity, View } from "react-native";
 import PDFUploader from "../../components/PDFUploader";
+import { API_ENDPOINTS, logApiCall } from "../../config/api";
+
 
 // Types for PDF assets returned by expo-document-picker
 type PDFAsset = {
@@ -44,9 +46,10 @@ export default function HomeScreen() {
       }
       formData.append("userId", userId);
 
-      // Replace with your LAN IP if testing on device!
+      logApiCall(API_ENDPOINTS.uploadContext, "POST", { userId });
+
       const res = await axios.post(
-        `https://3qn6nvqb-5000.inc1.devtunnels.ms/interview/upload-context`,
+        API_ENDPOINTS.uploadContext,
         formData
       );
       if (res.status === 200 || res.status === 201) {
@@ -62,15 +65,42 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 16 }}>
-      <Text style={{ fontSize: 22, marginBottom: 24 }}>Upload PDFs</Text>
+    <View style={{ flex: 1, justifyContent: "center", padding: 20, backgroundColor: "#f9fafb" }}>
+      <View style={{ marginBottom: 32 }}>
+        <Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 8, color: "#111827" }}>
+          🎯 Interview Prep AI
+        </Text>
+        <Text style={{ fontSize: 16, color: "#6b7280", marginBottom: 4 }}>
+          Upload your documents to get started
+        </Text>
+        <Text style={{ fontSize: 14, color: "#9ca3af" }}>
+          Step 1 of 2: Upload PDFs (max 2MB each)
+        </Text>
+      </View>
+
       <PDFUploader label="Resume" onPick={setResume} value={resume} />
       <PDFUploader
         label="Job Description"
         onPick={setJobDescription}
         value={jobDescription}
       />
-      <Button title="Upload & Continue" onPress={handleUpload} />
+
+      <View style={{ marginTop: 24 }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: resume && jobDescription ? "#10b981" : "#d1d5db",
+            padding: 16,
+            borderRadius: 12,
+            alignItems: "center",
+          }}
+          onPress={handleUpload}
+          disabled={!resume || !jobDescription}
+        >
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+            {resume && jobDescription ? "Continue to Questions →" : "Select Both PDFs First"}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

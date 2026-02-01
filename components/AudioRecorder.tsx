@@ -1,12 +1,13 @@
 import { Audio } from "expo-av";
 import React, { useRef, useState } from "react";
 import { ActivityIndicator, Button, Platform, Text, View } from "react-native";
+import { API_ENDPOINTS, logApiCall } from "../config/api";
 
 type AudioRecorderProps = {
   setTranscript?: (text: string) => void;
 };
 
-export default function AudioRecorder({ onResult }: AudioRecorderProps) {
+export default function AudioRecorder({ setTranscript: setTranscriptProp }: AudioRecorderProps) {
   const [transcript, setTranscript] = useState("");
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [listening, setListening] = useState(false);
@@ -41,7 +42,7 @@ export default function AudioRecorder({ onResult }: AudioRecorderProps) {
       setTranscript("Transcribing...");
       const text = await speechToTextWhisper(file);
       setTranscript(text);
-      onResult(text);
+      setTranscriptProp?.(text);
       chunksRef.current = [];
     };
   }
@@ -109,7 +110,7 @@ export default function AudioRecorder({ onResult }: AudioRecorderProps) {
 
         setTranscript((t) => {
           const newText = (t + " " + chunkText).trim();
-          props.setTranscript(newText);
+          setTranscriptProp?.(newText);
           return newText;
         });
 
@@ -141,8 +142,11 @@ export default function AudioRecorder({ onResult }: AudioRecorderProps) {
           type: "audio/wav",
         } as any);
       }
+
+      logApiCall(API_ENDPOINTS.transcribeAudio, "POST");
+
       const response = await fetch(
-        "https://3qn6nvqb-5000.inc1.devtunnels.ms/interview/transcribe-audio",
+        API_ENDPOINTS.transcribeAudio,
         {
           method: "POST",
           body: formData,
