@@ -1,50 +1,61 @@
-# Welcome to your Expo app 👋
+# InterviewAI — Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> AI-powered interview preparation platform with real-time LLM feedback, built with TypeScript and React for end-to-end interview simulation.
+>
+> ## Overview
+>
+> InterviewAI is a full-stack interview preparation platform that uses OpenAI's LLM APIs and LangChain to simulate realistic technical and behavioural interviews. The frontend delivers a smooth, real-time conversation experience with instant AI feedback on answers, code quality, and communication skills.
+>
+> This repository contains the **React/TypeScript frontend**. The Electron.js desktop app wrapper lives in [InterviewAI-desktop](https://github.com/vikramsaharan72056/InterviewAI-desktop).
+>
+> ## Tech Stack
+>
+> | Layer | Technologies |
+> |-------|-------------|
+> | **Frontend** | React, TypeScript |
+> | **AI Integration** | OpenAI API, LangChain |
+> | **Desktop** | Electron.js |
+> | **State Management** | Context API / Zustand |
+> | **Styling** | CSS Modules / Tailwind |
+>
+> ## Key Features
+>
+> - **Real-Time LLM Feedback** — AI evaluates answers in real time with structured, actionable feedback
+> - - **Interview Simulation** — Covers technical coding rounds, system design, and HR behavioural rounds
+>   - - **Electron.js Desktop App** — Packaged as a cross-platform desktop application for offline use
+>     - - **Session History** — Review past interview sessions with scores and improvement suggestions
+>       - - **Multi-Domain Support** — Frontend, backend, system design, and soft-skills interview modes
+>        
+>         - ## Project Structure
+>        
+>         - ```
+>           InterviewAI_frontend/
+>           ├── app/              # Main application screens & routing
+>           ├── components/       # Reusable UI components
+>           ├── hooks/            # Custom React hooks
+>           ├── utils/            # Utility functions
+>           ├── constants/        # App-wide constants
+>           ├── assets/           # Images, fonts, icons
+>           └── config/           # Environment & app configuration
+>           ```
+>
+> ## Getting Started
+>
+> ```bash
+> # Install dependencies
+> npm install
+>
+> # Start development server
+> npm start
+>
+> # Build for production
+> npm run build
+> ```
+>
+> ## Related Repositories
+>
+> - [InterviewAI-desktop](https://github.com/vikramsaharan72056/InterviewAI-desktop) — Electron.js desktop wrapper
+>
+> - ## Author
+>
+> - **Vikram Singh** — [Portfolio](https://vikramsaharan72056.github.io/portfolio-new/) · [LinkedIn](https://www.linkedin.com/in/vikram-singh-saharan/)
